@@ -1,15 +1,25 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import NavBar from "@/components/NavBar.astro";
+import { Image } from "astro:assets";
+import marbleImage from "@/marble.avif";
+import graniteImage from "@/granite.avif";
+import quartzImage from "@/quartz.avif";
+import cuarcitaImage from "@/cuarcita.avif";
+import Map from "../components/Map.astro";
 ---
 
 <Layout title="Inicio" description="Esta es la pagina principal donde muestro el contenido de mi pagina">
-<NavBar />
+  <NavBar />
+  <Map />
 
   <main class="container">
     <section class="hero">
       <h1>Especialistas en Mármol, Granito, Cuarzo y Cuarcita</h1>
-      <p>Fabricamos e instalamos cocinas, lavabos, asadores y cubiertas para mesas con materiales de alta calidad.</p>
+      <p>
+        Fabricamos e instalamos cocinas, lavabos, asadores y cubiertas para
+        mesas con materiales de alta calidad.
+      </p>
       <a href="/contact" class="btn">Contáctanos</a>
     </section>
 
@@ -17,31 +27,43 @@ import NavBar from "@/components/NavBar.astro";
       <h2>Nuestros Servicios</h2>
       <div class="grid">
         <div class="service">
-          <img src="@/marble.avif" alt="Mármol">
+          <Image src={marbleImage} alt="Mármol" class="imagen"/>
           <h3>Mármol</h3>
           <p>Elegancia y durabilidad para cualquier espacio.</p>
         </div>
+
         <div class="service">
-          <img src="/public/assets/granito.jpg" alt="Granito">
+          <Image src={graniteImage} alt="Granito" class="imagen"/>
           <h3>Granito</h3>
           <p>Resistencia y belleza en cada pieza.</p>
         </div>
+
         <div class="service">
-          <img src="/public/assets/cuarzo.jpg" alt="Cuarzo">
+          <Image src={quartzImage} alt="Cuarzo" class="imagen"/>
           <h3>Cuarzo</h3>
           <p>Material moderno con acabados perfectos.</p>
         </div>
+
         <div class="service">
-          <img src="/public/assets/cuarcita.jpg" alt="Cuarcita">
+          <Image src={cuarcitaImage} alt="Cuarcita" class="imagen"/>
           <h3>Cuarcita</h3>
           <p>Fuerza y estética natural para tu hogar.</p>
         </div>
-      </div>
     </section>
 
     <section class="about">
       <h2>¿Por qué elegirnos?</h2>
-      <p>Contamos con años de experiencia en fabricación e instalación de cubiertas de mármol, granito, cuarzo y cuarcita. Nuestra misión es transformar tus espacios con materiales de la más alta calidad y diseño.</p>
+      <p>
+        Contamos con mas de 30 años de experiencia en fabricación e instalación de
+        cubiertas de mármol, granito, cuarzo y cuarcita. Nuestra misión es
+        transformar tus espacios con materiales de la más alta calidad y diseño.
+      </p>
     </section>
   </main>
+  <style>
+    .imagen{
+      max-height: 250px;;
+      max-width: 250px;
+    }
+  </style>
 </Layout>
