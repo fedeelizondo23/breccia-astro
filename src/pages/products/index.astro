@@ -1,10 +1,43 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import NavBar from "@/components/NavBar.astro";
+import { Image } from "astro:assets";
+
+// Imágenes de productos
+import marbleImage from "@/marble.avif";
+import graniteImage from "@/granite.avif";
+import quartzImage from "@/quartz.avif";
+import cuarcitaImage from "@/cuarcita.avif";
+
+// Lista de productos
+const products = [
+  { name: "Mármol", description: "Elegancia y durabilidad para cualquier espacio.", image: marbleImage },
+  { name: "Granito", description: "Resistencia y belleza en cada pieza.", image: graniteImage },
+  { name: "Cuarzo", description: "Material moderno con acabados perfectos.", image: quartzImage },
+  { name: "Cuarcita", description: "Fuerza y estética natural para tu hogar.", image: cuarcitaImage },
+];
 ---
 
 <Layout title="Productos">
-<NavBar />
+  <section class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Nuestros Productos</h1>
+    <p class="text-lg text-center text-gray-600 mb-10">
+      Descubre nuestra selección de materiales de alta calidad para transformar tus espacios.
+    </p>
 
-<h1>Productos</h1>
+    <!-- Grid de productos -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {products.map((product) => (
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+          <Image src={product.image} alt={product.name} class="w-full h-48 object-cover" />
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold text-gray-800">{product.name}</h3>
+            <p class="text-gray-600 mt-2">{product.description}</p>
+            <a href={`/products/${product.name.toLowerCase()}`} class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+              Ver más
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 </Layout>

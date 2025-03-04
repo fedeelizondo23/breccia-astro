@@ -13,47 +13,57 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="{Astro.generator}" />
     <meta name="description" content={description} />
-    <title>Breccia Marmol | {title}</title>
+    <title>Breccia Mármol | {title}</title>
   </head>
-  <body class="bg-gray-100 text-gray-900 font-sans">
+  <body class="bg-gray-100 text-gray-900 font-sans flex flex-col min-h-screen">
+    
     <!-- Navbar -->
-  
+    <NavBar />
 
     <!-- Contenido dinámico -->
-    <main class="container mx-auto p-6">
+    <main class="container mx-auto p-8 flex-grow">
       <slot />
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center py-6 mt-6">
+      <p>&copy; 2025 Breccia Mármol. Todos los derechos reservados.</p>
+      <p class="text-sm">Desarrollado con ❤️ por el equipo de tecnología</p>
+    </footer>
 
     <!-- Script de autenticación en el cliente -->
     <script>
       document.addEventListener("DOMContentLoaded", async function () {
         const token = localStorage.getItem("token");
-        if (token) {
-          try {
-            const response = await fetch("http://localhost:5000/api/auth/profile", {
-              method: "GET",
-              headers: { "Authorization": "Bearer " + token },
-            });
-            const data = await response.json();
-            
-            // Modificar los botones de login/register en lugar de duplicar el nav
-            const loginButton = document.getElementById("login-btn");
-            const registerButton = document.getElementById("register-btn");
-            const userContainer = document.getElementById("user-info");
+        const loginButton = document.getElementById("login-btn");
+        const registerButton = document.getElementById("register-btn");
+        const userContainer = document.getElementById("user-info");
 
-            if (data.username) {
-              if (loginButton) loginButton.style.display = "none";
-              if (registerButton) registerButton.style.display = "none";
-              if (userContainer) {
-                userContainer.innerHTML = `
-                  <span class="text-green-400">Bienvenido, ${data.username}</span>
-                  <button onclick="logout()" class="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cerrar sesión</button>
-                `;
-              }
+        if (!token) return; // Si no hay token, no hacemos nada
+
+        try {
+          const response = await fetch("http://localhost:5000/api/auth/profile", {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + token },
+          });
+
+          if (!response.ok) throw new Error("Token inválido o expirado");
+
+          const data = await response.json();
+
+          if (data.username) {
+            if (loginButton) loginButton.classList.add("hidden");
+            if (registerButton) registerButton.classList.add("hidden");
+            if (userContainer) {
+              userContainer.innerHTML = `
+                <span class="text-green-400">Bienvenido, ${data.username}</span>
+                <button onclick="logout()" class="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cerrar sesión</button>
+              `;
             }
-          } catch (error) {
-            console.error("Error al obtener usuario:", error);
           }
+        } catch (error) {
+          console.error("Error en autenticación:", error);
+          localStorage.removeItem("token"); // Limpiar token inválido
         }
       });
 
@@ -62,5 +72,6 @@ const { title, description } = Astro.props;
         window.location.href = "/login";
       }
     </script>
+    
   </body>
 </html>

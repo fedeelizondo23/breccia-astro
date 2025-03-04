@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import NavBar from "@/components/NavBar.astro";
 import { Image } from "astro:assets";
 import marbleImage from "@/marble.avif";
 import graniteImage from "@/granite.avif";
@@ -9,61 +8,54 @@ import cuarcitaImage from "@/cuarcita.avif";
 import Map from "../components/Map.astro";
 ---
 
-<Layout title="Inicio" description="Esta es la pagina principal donde muestro el contenido de mi pagina">
-  <NavBar />
-  <Map />
+<Layout title="Inicio" description="Esta es la página principal donde muestro el contenido de mi página">
+  
+  <section class="bg-white shadow-lg rounded-lg p-8 text-center mb-10">
+    <h1 class="text-4xl font-bold text-gray-800">Bienvenido a Breccia Mármol</h1>
+    <p class="text-lg text-gray-600 mt-4">
+      Somos especialistas en mármol, granito, cuarzo y cuarcita, ofreciendo cubiertas de la más alta calidad
+      para transformar tus espacios con elegancia y durabilidad.
+    </p>
+  </section>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Especialistas en Mármol, Granito, Cuarzo y Cuarcita</h1>
-      <p>
-        Fabricamos e instalamos cocinas, lavabos, asadores y cubiertas para
-        mesas con materiales de alta calidad.
+  <main class="container mx-auto p-8">
+    <section class="bg-white shadow-lg rounded-lg p-8 text-center mb-10">
+      <h1 class="text-4xl font-bold text-gray-800">Especialistas en Mármol, Granito, Cuarzo y Cuarcita</h1>
+      <p class="text-lg text-gray-600 mt-4">
+        Fabricamos e instalamos cocinas, lavabos, asadores y cubiertas para mesas con materiales de alta calidad.
       </p>
-      <a href="/contact" class="btn">Contáctanos</a>
+      <a href="/contact" class="mt-6 inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">Contáctanos</a>
     </section>
 
-    <section class="services">
-      <h2>Nuestros Servicios</h2>
-      <div class="grid">
-        <div class="service">
-          <Image src={marbleImage} alt="Mármol" class="imagen"/>
-          <h3>Mármol</h3>
-          <p>Elegancia y durabilidad para cualquier espacio.</p>
+    <section class="services text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Nuestros Servicios</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
+          <Image src={marbleImage} alt="Mármol" class="w-full h-48 object-cover rounded-md mb-4" />
+          <h3 class="text-xl font-semibold text-gray-700">Mármol</h3>
+          <p class="text-gray-600">Elegancia y durabilidad para cualquier espacio.</p>
         </div>
 
-        <div class="service">
-          <Image src={graniteImage} alt="Granito" class="imagen"/>
-          <h3>Granito</h3>
-          <p>Resistencia y belleza en cada pieza.</p>
+        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
+          <Image src={graniteImage} alt="Granito" class="w-full h-48 object-cover rounded-md mb-4" />
+          <h3 class="text-xl font-semibold text-gray-700">Granito</h3>
+          <p class="text-gray-600">Resistencia y belleza en cada pieza.</p>
         </div>
 
-        <div class="service">
-          <Image src={quartzImage} alt="Cuarzo" class="imagen"/>
-          <h3>Cuarzo</h3>
-          <p>Material moderno con acabados perfectos.</p>
+        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
+          <Image src={quartzImage} alt="Cuarzo" class="w-full h-48 object-cover rounded-md mb-4" />
+          <h3 class="text-xl font-semibold text-gray-700">Cuarzo</h3>
+          <p class="text-gray-600">Material moderno con acabados perfectos.</p>
         </div>
 
-        <div class="service">
-          <Image src={cuarcitaImage} alt="Cuarcita" class="imagen"/>
-          <h3>Cuarcita</h3>
-          <p>Fuerza y estética natural para tu hogar.</p>
+        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
+          <Image src={cuarcitaImage} alt="Cuarcita" class="w-full h-48 object-cover rounded-md mb-4" />
+          <h3 class="text-xl font-semibold text-gray-700">Cuarcita</h3>
+          <p class="text-gray-600">Fuerza y estética natural para tu hogar.</p>
         </div>
-    </section>
-
-    <section class="about">
-      <h2>¿Por qué elegirnos?</h2>
-      <p>
-        Contamos con mas de 30 años de experiencia en fabricación e instalación de
-        cubiertas de mármol, granito, cuarzo y cuarcita. Nuestra misión es
-        transformar tus espacios con materiales de la más alta calidad y diseño.
-      </p>
+      </div>
     </section>
   </main>
-  <style>
-    .imagen{
-      max-height: 250px;;
-      max-width: 250px;
-    }
-  </style>
+  
+  <Map />
 </Layout>

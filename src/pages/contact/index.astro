@@ -1,10 +1,151 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import NavBar from "@/components/NavBar.astro";
 ---
 
 <Layout title="Contacto">
-<NavBar />
+  <section
+    class="container mx-auto p-8 bg-white shadow-lg rounded-lg text-center"
+  >
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">Contáctanos</h1>
+    <p class="text-lg text-gray-600 mb-4">
+      ¿Tienes alguna pregunta o deseas una cotización? Completa el formulario y
+      nos pondremos en contacto contigo.
+    </p>
+  </section>
 
-<h1>Contacto</h1>
+  <section class="container mx-auto p-8 bg-gray-100 rounded-lg mt-8">
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Formulario -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+          Envíanos un mensaje
+        </h2>
+        <form id="contact-form" class="space-y-4">
+          <div>
+            <label for="name" class="block text-gray-700 font-semibold mb-2"
+              >Nombre</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-gray-700 font-semibold mb-2"
+              >Correo Electrónico</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="message" class="block text-gray-700 font-semibold mb-2"
+              >Mensaje</label
+            >
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white font-semibold p-3 rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Enviar Mensaje
+          </button>
+        </form>
+      </div>
+
+      <!-- Información de Contacto -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+          Nuestras Redes y Contacto
+        </h2>
+        <ul class="space-y-4">
+          <!-- WhatsApp -->
+          <li
+            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
+              class="w-8 h-8 text-green-500"
+              alt="WhatsApp"
+            />
+            <a
+              href="https://wa.me/528113775574"
+              class="text-gray-800 font-medium">+52 81 1377 5574</a
+            >
+          </li>
+          <!-- Instagram -->
+          <li
+            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+              class="w-8 h-8 text-pink-500"
+              alt="Instagram"
+            />
+            <a
+              href="https://instagram.com/brecciamarmol"
+              class="text-gray-800 font-medium">@brecciamarmol</a
+            >
+          </li>
+          <!-- Facebook -->
+          <li
+            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+              class="w-8 h-8 text-blue-600"
+              alt="Facebook"
+            />
+            <a
+              href="https://www.facebook.com/breccia.marmol.7"
+              class="text-gray-800 font-medium">Breccia Mármol</a
+            >
+          </li>
+          <!-- Correo Electrónico -->
+          <li
+            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"
+              class="w-8 h-8 text-red-500"
+              alt="Email"
+            />
+            <a
+              href="mailto:brecciamarmol@gmail.com"
+              class="text-gray-800 font-medium">brecciamarmol@gmail.com</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document
+      .getElementById("contact-form")
+      ?.addEventListener("submit", function (event) {
+        event.preventDefault();
+        alert(
+          "Gracias por tu mensaje. Nos pondremos en contacto contigo pronto."
+        );
+
+        // Solución correcta para resetear el formulario
+        (event.target as HTMLFormElement).reset();
+      });
+  </script>
 </Layout>

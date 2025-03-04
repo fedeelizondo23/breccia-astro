@@ -1,10 +1,50 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import NavBar from "@/components/NavBar.astro";
 ---
 
 <Layout title="Acerca de Nosotros">
-  <NavBar />
+  <section
+    class="container mx-auto p-8 bg-white shadow-lg rounded-lg text-center"
+  >
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">Nuestra Historia</h1>
+    <p class="text-lg text-gray-600">
+      Somos una empresa fundada en 1993, Breccia Mármol ha trabajado con
+      clientes en todo el país, ofreciendo materiales de primera calidad para
+      hogares y proyectos comerciales.
+    </p>
+  </section>
 
-  <h1>Acerca de Nosotros</h1>
+  <section
+    class="container mx-auto p-8 bg-gray-100 rounded-lg mt-8 text-center"
+  >
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestra Misión</h2>
+    <p class="text-lg text-gray-600">
+      Nuestra misión es transformar espacios con materiales de la más alta
+      calidad, combinando elegancia y resistencia en cada uno de nuestros
+      proyectos.
+    </p>
+  </section>
+
+  <section
+    class="container mx-auto p-8 bg-white shadow-lg rounded-lg mt-8 text-center"
+  >
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestro Equipo</h2>
+    <p class="text-lg text-gray-600">
+      Contamos con un equipo de expertos en mármol y granito, diseñadores y
+      artesanos altamente capacitados, que trabajan con pasión para ofrecer
+      productos que superan las expectativas de nuestros clientes.
+    </p>
+  </section>
+
+  <section
+    class="container mx-auto p-8 bg-gray-100 rounded-lg mt-8 text-center"
+  >
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestros Valores</h2>
+    <ul class="text-lg text-gray-600 list-disc list-inside">
+      <li>Calidad y excelencia en cada detalle.</li>
+      <li>Compromiso con nuestros clientes y sus proyectos.</li>
+      <li>Innovación en materiales y diseños.</li>
+      <li>Responsabilidad y sostenibilidad en cada proceso.</li>
+    </ul>
+  </section>
 </Layout>

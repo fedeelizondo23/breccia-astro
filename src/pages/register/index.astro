@@ -1,57 +1,77 @@
 ---
-const title = "Registro"
+const title = "Registro";
 import Layout from "@/layouts/Layout.astro";
-import NavBar from "@/components/NavBar.astro";
 ---
-<Layout>
-    <NavBar />
-<html>
-  <head>
-    <title>Registro</title>
-  </head>
-  <body>
-    <h1>Registro</h1>
-    <form id="register-form">
-      <input type="text" name="username" placeholder="Nombre de usuario" required />
-      <input type="email" name="email" placeholder="Correo electrónico" required />
-      <input type="password" name="password" placeholder="Contraseña" required />
-      <button type="submit">Registrarse</button>
+
+<Layout title={title}>
+  <section class="container mx-auto p-8 max-w-md bg-white shadow-lg rounded-lg">
+    <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">Crear una Cuenta</h1>
+    
+    <form id="register-form" class="space-y-4">
+      <div>
+        <label for="username" class="block text-gray-700 font-semibold mb-2">Nombre de Usuario</label>
+        <input type="text" id="username" name="username" placeholder="Ingresa tu nombre de usuario" required 
+          class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label for="email" class="block text-gray-700 font-semibold mb-2">Correo Electrónico</label>
+        <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required 
+          class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label for="password" class="block text-gray-700 font-semibold mb-2">Contraseña</label>
+        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required 
+          class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <button type="submit" 
+        class="w-full bg-blue-600 text-white font-semibold p-3 rounded-lg hover:bg-blue-700 transition duration-300">
+        Registrarse
+      </button>
     </form>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("register-form");
+    <p class="text-center text-gray-600 mt-4">¿Ya tienes cuenta? <a href="/login" class="text-blue-600 font-semibold hover:underline">Inicia sesión</a></p>
+  </section>
 
-        if (!(form instanceof HTMLFormElement)) {
-          console.error("No se encontró un formulario válido.");
-          return;
-        }
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("register-form");
 
-        form.onsubmit = async function (event) {
-          event.preventDefault();
+      if (!(form instanceof HTMLFormElement)) {
+        console.error("No se encontró un formulario válido.");
+        return;
+      }
 
-          const formData = new FormData(form);
-          const user = {
-            username: formData.get("username"),
-            email: formData.get("email"),
-            password: formData.get("password"),
-          };
+      form.onsubmit = async function (event) {
+        event.preventDefault();
 
-          try {
-            const response = await fetch("http://localhost:5000/api/auth/register", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(user),
-            });
-
-            const data = await response.json();
-            alert(data.message || "Registro exitoso");
-          } catch (error) {
-            alert("Error en el registro");
-          }
+        const formData = new FormData(form);
+        const user = {
+          username: formData.get("username"),
+          email: formData.get("email"),
+          password: formData.get("password"),
         };
-      });
-    </script>
-  </body>
-</html>
+
+        try {
+          const response = await fetch("http://localhost:5000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user),
+          });
+
+          const data = await response.json();
+          if (data.message) {
+            alert(data.message);
+            window.location.href = "/login"; // Redirigir al login después del registro exitoso
+          } else {
+            alert("Error en el registro: " + (data.error || "Inténtalo de nuevo"));
+          }
+        } catch (error) {
+          alert("Error en el registro. Intenta de nuevo más tarde.");
+        }
+      };
+    });
+  </script>
 </Layout>
