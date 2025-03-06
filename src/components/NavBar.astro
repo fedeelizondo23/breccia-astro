@@ -1,5 +1,11 @@
 ---
 const { user } = Astro.props;
+
+import type { Session } from '@auth/core/types';
+import { Auth, SignIn, SignOut } from 'auth-astro/components';
+
+// import { getSession } from 'auth-astro/server';
+// const session = await getSession(Astro.request);
 ---
 
 <nav class="bg-gray-900 text-white py-4 px-8 flex justify-between items-center">
@@ -14,7 +20,21 @@ const { user } = Astro.props;
   </ul>
   <div class="flex gap-4">
     <div id="user-info"></div>
-    <a href="/login" id="login-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Iniciar sesión</a>
-    <a href="/register" id="register-btn" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Registrarse</a>
+    <Auth>
+      {(session: Session) => {
+        if (session) {
+          return (<SignOut>Cerrar sesión</SignOut>)
+        } else {
+          return (<SignIn provider="google" id="login-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Iniciar sesión</SignIn>)
+        }
+      }}
+    </Auth>
+    <!-- <button id="login-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Iniciar sesión</button>
+    <button id="register-btn" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Registrarse</button> -->
   </div>
 </nav>
+<!-- <script>
+  const { signIn, signOut } = await import("auth-astro/client");
+  document.querySelector("#login").onclick = () => signIn("google");
+  document.querySelector("#logout").onclick = () => signOut();
+</script> -->
