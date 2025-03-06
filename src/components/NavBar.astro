@@ -23,7 +23,7 @@ import { Auth, SignIn, SignOut } from 'auth-astro/components';
     <Auth>
       {(session: Session) => {
         if (session) {
-          return (<SignOut>Cerrar sesión</SignOut>)
+          return (<SignOut class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cerrar sesión</SignOut>)
         } else {
           return (<SignIn provider="google" id="login-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Iniciar sesión</SignIn>)
         }
