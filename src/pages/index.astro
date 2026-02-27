@@ -6,6 +6,7 @@ import graniteImage from "@/granite.avif";
 import quartzImage from "@/quartz.avif";
 import cuarcitaImage from "@/cuarcita.avif";
 import Map from "../components/Map.astro";
+import { getSession } from 'auth-astro/server';
 ---
 
 <Layout title="Inicio" description="Esta es la página principal donde muestro el contenido de mi página">
@@ -56,6 +57,5 @@ import Map from "../components/Map.astro";
       </div>
     </section>
   </main>
-  
   <Map />
 </Layout>
