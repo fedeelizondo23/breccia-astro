@@ -1,151 +1,146 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? "http://localhost:5001";
 ---
 
 <Layout title="Contacto">
-  <section
-    class="container mx-auto p-8 bg-white shadow-lg rounded-lg text-center"
-  >
-    <h1 class="text-4xl font-bold text-gray-800 mb-6">Contáctanos</h1>
-    <p class="text-lg text-gray-600 mb-4">
-      ¿Tienes alguna pregunta o deseas una cotización? Completa el formulario y
-      nos pondremos en contacto contigo.
+  <section class="section-card mb-8 text-center">
+    <h1 class="text-4xl font-bold">Contáctanos</h1>
+    <p class="mx-auto mt-4 max-w-3xl text-base sm:text-lg">
+      ¿Tienes dudas o necesitas cotización? Compártenos los detalles de tu proyecto
+      y te respondemos a la brevedad.
     </p>
   </section>
 
-  <section class="container mx-auto p-8 bg-gray-100 rounded-lg mt-8">
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Formulario -->
-      <div class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-          Envíanos un mensaje
-        </h2>
-        <form id="contact-form" class="space-y-4">
+  <section class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+    <div class="section-card">
+      <h2 class="text-2xl font-semibold">Envíanos un mensaje</h2>
+      <p class="mt-2 text-sm">Te contactamos con propuesta y tiempos estimados.</p>
+        <form id="contact-form" class="space-y-4" data-api-base-url={apiBaseUrl}>
           <div>
-            <label for="name" class="block text-gray-700 font-semibold mb-2"
-              >Nombre</label
-            >
+            <label for="name" class="mb-2 block text-sm font-semibold text-stone-700">Nombre completo</label>
             <input
               type="text"
               id="name"
               name="name"
-              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Ej. Juan Pérez"
+              class="w-full rounded-lg border border-stone-300 px-4 py-3 text-sm"
               required
             />
           </div>
 
           <div>
-            <label for="email" class="block text-gray-700 font-semibold mb-2"
-              >Correo Electrónico</label
-            >
+            <label for="email" class="mb-2 block text-sm font-semibold text-stone-700">Correo electrónico</label>
             <input
               type="email"
               id="email"
               name="email"
-              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="tu-correo@ejemplo.com"
+              class="w-full rounded-lg border border-stone-300 px-4 py-3 text-sm"
               required
             />
           </div>
 
           <div>
-            <label for="message" class="block text-gray-700 font-semibold mb-2"
-              >Mensaje</label
-            >
+            <label for="message" class="mb-2 block text-sm font-semibold text-stone-700">Mensaje</label>
             <textarea
               id="message"
               name="message"
+              placeholder="Cuéntanos qué tipo de cubierta necesitas, medidas y ubicación."
               rows="4"
-              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full rounded-lg border border-stone-300 px-4 py-3 text-sm"
               required></textarea>
           </div>
 
-          <button
-            type="submit"
-            class="w-full bg-blue-600 text-white font-semibold p-3 rounded-lg hover:bg-blue-700 transition duration-300"
-          >
+          <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" class="hidden" />
+
+          <button type="submit" class="btn-primary w-full" id="contact-submit-btn">
             Enviar Mensaje
           </button>
+          <p id="contact-status" class="text-sm" aria-live="polite"></p>
         </form>
       </div>
 
-      <!-- Información de Contacto -->
-      <div class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-          Nuestras Redes y Contacto
-        </h2>
-        <ul class="space-y-4">
-          <!-- WhatsApp -->
-          <li
-            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
-              class="w-8 h-8 text-green-500"
-              alt="WhatsApp"
-            />
-            <a
-              href="https://wa.me/528113775574"
-              class="text-gray-800 font-medium">+52 81 1377 5574</a
-            >
-          </li>
-          <!-- Instagram -->
-          <li
-            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
-              class="w-8 h-8 text-pink-500"
-              alt="Instagram"
-            />
-            <a
-              href="https://instagram.com/brecciamarmol"
-              class="text-gray-800 font-medium">@brecciamarmol</a
-            >
-          </li>
-          <!-- Facebook -->
-          <li
-            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
-              class="w-8 h-8 text-blue-600"
-              alt="Facebook"
-            />
-            <a
-              href="https://www.facebook.com/breccia.marmol.7"
-              class="text-gray-800 font-medium">Breccia Mármol</a
-            >
-          </li>
-          <!-- Correo Electrónico -->
-          <li
-            class="flex items-center gap-4 p-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"
-              class="w-8 h-8 text-red-500"
-              alt="Email"
-            />
-            <a
-              href="mailto:brecciamarmol@gmail.com"
-              class="text-gray-800 font-medium">brecciamarmol@gmail.com</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
+    <aside class="section-card">
+      <h2 class="text-2xl font-semibold">Canales de contacto</h2>
+      <ul class="mt-4 space-y-3 text-sm text-stone-700">
+        <li class="rounded-lg bg-stone-100 px-4 py-3">
+          WhatsApp:
+          <a href="https://wa.me/528113775574" class="ml-1 font-semibold text-stone-900 hover:underline">+52 81 1377 5574</a>
+        </li>
+        <li class="rounded-lg bg-stone-100 px-4 py-3">
+          Instagram:
+          <a href="https://instagram.com/brecciamarmol" class="ml-1 font-semibold text-stone-900 hover:underline">@brecciamarmol</a>
+        </li>
+        <li class="rounded-lg bg-stone-100 px-4 py-3">
+          Facebook:
+          <a href="https://www.facebook.com/breccia.marmol.7" class="ml-1 font-semibold text-stone-900 hover:underline">Breccia Mármol</a>
+        </li>
+        <li class="rounded-lg bg-stone-100 px-4 py-3">
+          Correo:
+          <a href="mailto:brecciamarmol@gmail.com" class="ml-1 font-semibold text-stone-900 hover:underline">brecciamarmol@gmail.com</a>
+        </li>
+      </ul>
+      <p class="mt-5 rounded-lg border border-stone-200 bg-white px-4 py-3 text-sm">
+        Horario sugerido de atención:<br />
+        Lunes a viernes: 9:00 a 17:00<br />
+        Sábado: 9:00 a 13:00
+      </p>
+    </aside>
   </section>
 
   <script>
-    document
-      .getElementById("contact-form")
-      ?.addEventListener("submit", function (event) {
-        event.preventDefault();
-        alert(
-          "Gracias por tu mensaje. Nos pondremos en contacto contigo pronto."
-        );
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contact-form");
+      const submitButton = document.getElementById("contact-submit-btn");
+      const statusText = document.getElementById("contact-status");
 
-        // Solución correcta para resetear el formulario
-        (event.target as HTMLFormElement).reset();
+      if (!(form instanceof HTMLFormElement)) return;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!(submitButton instanceof HTMLButtonElement) || !(statusText instanceof HTMLElement)) return;
+
+        const formData = new FormData(form);
+        const apiBase = form.dataset.apiBaseUrl || "http://localhost:5001";
+
+        const payload = {
+          name: String(formData.get("name") || ""),
+          email: String(formData.get("email") || ""),
+          message: String(formData.get("message") || ""),
+          website: String(formData.get("website") || ""),
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando...";
+        statusText.textContent = "";
+
+        try {
+          const response = await fetch(`${apiBase}/api/contact/send`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "No se pudo enviar el mensaje.");
+          }
+
+          statusText.textContent = "Gracias, tu mensaje fue enviado correctamente.";
+          statusText.className = "text-sm text-emerald-600";
+          form.reset();
+        } catch (error) {
+          statusText.textContent = "No se pudo enviar el mensaje. Intenta nuevamente.";
+          statusText.className = "text-sm text-red-600";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Enviar Mensaje";
+        }
       });
+    });
   </script>
 </Layout>
