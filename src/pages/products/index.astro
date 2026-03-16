@@ -18,25 +18,27 @@ const products = [
 ---
 
 <Layout title="Productos">
-  <section class="container mx-auto p-8">
-    <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Nuestros Productos</h1>
-    <p class="text-lg text-center text-gray-600 mb-10">
-      Descubre nuestra selección de materiales de alta calidad para transformar tus espacios.
+  <section class="section-card mb-8 text-center">
+    <h1 class="text-4xl font-bold">Nuestros Materiales</h1>
+    <p class="mx-auto mt-4 max-w-3xl text-base sm:text-lg">
+      Descubre nuestra selección de piedras naturales y superficies premium para cocinas, baños,
+      mesas, asadores y proyectos comerciales.
     </p>
+  </section>
 
-    <!-- Grid de productos -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <section>
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
       {products.map((product) => (
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-          <Image src={product.image} alt={product.name} class="w-full h-48 object-cover" />
-          <div class="p-4 text-center">
-            <h3 class="text-xl font-semibold text-gray-800">{product.name}</h3>
-            <p class="text-gray-600 mt-2">{product.description}</p>
-            <a href={`/products/${product.name.toLowerCase()}`} class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-              Ver más
+        <article class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <Image src={product.image} alt={product.name} class="h-52 w-full object-cover" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold">{product.name}</h3>
+            <p class="mt-2 text-sm">{product.description}</p>
+            <a href="/contact" class="btn-primary mt-4 w-full">
+              Solicitar cotización
             </a>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </section>
