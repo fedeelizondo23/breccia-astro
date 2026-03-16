@@ -161,6 +161,25 @@ html.theme-dark .btn-secondary:focus-visible {
   border-radius: 999px;
   background: #ffffff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+.theme-icon-sun {
+  display: block;
+  color: #f59e0b;
+}
+
+.theme-icon-moon {
+  display: none;
+  color: #a1a1aa;
 }
 
 .theme-switch.is-dark .theme-switch-track {
@@ -170,7 +189,16 @@ html.theme-dark .btn-secondary:focus-visible {
 
 .theme-switch.is-dark .theme-switch-knob {
   transform: translateX(1.2rem);
-  background: #f5f5f5;
+  background: #27272a;
+}
+
+.theme-switch.is-dark .theme-icon-sun {
+  display: none;
+}
+
+.theme-switch.is-dark .theme-icon-moon {
+  display: block;
+  color: #e4e4e7;
 }
 
 html.theme-dark .theme-switch {
