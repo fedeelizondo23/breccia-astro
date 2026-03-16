@@ -1,9 +1,172 @@
 @import "tailwindcss";
 
-#map {
-    width: 100%;
-    height: 400px;
-    border-radius: 8px;
-    background: lightgray; /* Para ver si se está cargando */
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-stone-50 text-stone-900;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight text-stone-900;
+  }
+
+  p {
+    @apply leading-relaxed text-stone-600;
+  }
+
+  a {
+    @apply transition;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-stone-800 ring-offset-2 ring-offset-stone-50;
+  }
+}
+
+@layer components {
+  .section-card {
+    @apply rounded-2xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-stone-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-stone-700;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-stone-300 px-5 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-100;
+  }
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  background: #e7e5e4;
+}
+
+html.theme-dark body {
+  background: #09090b !important;
+  color: #f5f5f5 !important;
+}
+
+html.theme-dark nav,
+html.theme-dark footer {
+  background-color: #111114 !important;
+  border-color: #27272a !important;
+}
+
+html.theme-dark .section-card,
+html.theme-dark .bg-white,
+html.theme-dark .bg-white\/80,
+html.theme-dark .bg-stone-100,
+html.theme-dark article,
+html.theme-dark details,
+html.theme-dark aside {
+  background-color: #16161a !important;
+  border-color: #2f2f35 !important;
+  color: #f4f4f5 !important;
+}
+
+html.theme-dark .text-stone-900,
+html.theme-dark .text-stone-800,
+html.theme-dark .text-stone-700,
+html.theme-dark .text-stone-600,
+html.theme-dark p,
+html.theme-dark span,
+html.theme-dark li,
+html.theme-dark label,
+html.theme-dark h1,
+html.theme-dark h2,
+html.theme-dark h3,
+html.theme-dark a,
+html.theme-dark summary {
+  color: #f5f5f5 !important;
+}
+
+html.theme-dark .border-stone-200,
+html.theme-dark .border-stone-300 {
+  border-color: #3f3f46 !important;
+}
+
+html.theme-dark input,
+html.theme-dark textarea,
+html.theme-dark select {
+  background-color: #101014 !important;
+  color: #f5f5f5 !important;
+  border-color: #3f3f46 !important;
+}
+
+html.theme-dark input::placeholder,
+html.theme-dark textarea::placeholder {
+  color: #a1a1aa !important;
+}
+
+html.theme-dark .btn-primary {
+  background-color: #f5f5f5 !important;
+  color: #0a0a0a !important;
+}
+
+html.theme-dark .btn-secondary {
+  color: #f5f5f5 !important;
+  border-color: #a1a1aa !important;
+}
+
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #d6d3d1;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: #44403c;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 180ms ease;
+}
+
+.theme-switch:hover {
+  background: #f5f5f4;
+}
+
+.theme-switch-track {
+  position: relative;
+  width: 2.3rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: #e7e5e4;
+  border: 1px solid #d6d3d1;
+}
+
+.theme-switch-knob {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 999px;
+  background: #111827;
+  transition: transform 180ms ease;
+}
+
+.theme-switch.is-dark .theme-switch-track {
+  background: #27272a;
+  border-color: #52525b;
+}
+
+.theme-switch.is-dark .theme-switch-knob {
+  transform: translateX(0.95rem);
+  background: #f5f5f5;
+}
+
+html.theme-dark .theme-switch {
+  background: #111114;
+  color: #f5f5f5;
+  border-color: #3f3f46;
+}
   
