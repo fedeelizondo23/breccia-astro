@@ -1,5 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? "http://localhost:5001";
 ---
 
 <Layout title="Contacto">
@@ -15,7 +17,7 @@ import Layout from "@/layouts/Layout.astro";
     <div class="section-card">
       <h2 class="text-2xl font-semibold">Envíanos un mensaje</h2>
       <p class="mt-2 text-sm">Te contactamos con propuesta y tiempos estimados.</p>
-        <form id="contact-form" class="space-y-4">
+        <form id="contact-form" class="space-y-4" data-api-base-url={apiBaseUrl}>
           <div>
             <label for="name" class="mb-2 block text-sm font-semibold text-stone-700">Nombre completo</label>
             <input
@@ -51,9 +53,12 @@ import Layout from "@/layouts/Layout.astro";
               required></textarea>
           </div>
 
-          <button type="submit" class="btn-primary w-full">
+          <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" class="hidden" />
+
+          <button type="submit" class="btn-primary w-full" id="contact-submit-btn">
             Enviar Mensaje
           </button>
+          <p id="contact-status" class="text-sm" aria-live="polite"></p>
         </form>
       </div>
 
@@ -86,14 +91,56 @@ import Layout from "@/layouts/Layout.astro";
   </section>
 
   <script>
-    document
-      .getElementById("contact-form")
-      ?.addEventListener("submit", function (event) {
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contact-form");
+      const submitButton = document.getElementById("contact-submit-btn");
+      const statusText = document.getElementById("contact-status");
+
+      if (!(form instanceof HTMLFormElement)) return;
+
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        alert(
-          "Gracias por tu mensaje. Nos pondremos en contacto contigo pronto."
-        );
-        (event.target as HTMLFormElement).reset();
+
+        if (!(submitButton instanceof HTMLButtonElement) || !(statusText instanceof HTMLElement)) return;
+
+        const formData = new FormData(form);
+        const apiBase = form.dataset.apiBaseUrl || "http://localhost:5001";
+
+        const payload = {
+          name: String(formData.get("name") || ""),
+          email: String(formData.get("email") || ""),
+          message: String(formData.get("message") || ""),
+          website: String(formData.get("website") || ""),
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando...";
+        statusText.textContent = "";
+
+        try {
+          const response = await fetch(`${apiBase}/api/contact/send`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "No se pudo enviar el mensaje.");
+          }
+
+          statusText.textContent = "Gracias, tu mensaje fue enviado correctamente.";
+          statusText.className = "text-sm text-emerald-600";
+          form.reset();
+        } catch (error) {
+          statusText.textContent = "No se pudo enviar el mensaje. Intenta nuevamente.";
+          statusText.className = "text-sm text-red-600";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Enviar Mensaje";
+        }
       });
+    });
   </script>
 </Layout>

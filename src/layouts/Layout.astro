@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import NavBar from "@/components/NavBar.astro";
 
 const { title, description } = Astro.props;
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? "http://localhost:5001";
 ---
 
 <!DOCTYPE html>
@@ -14,8 +15,17 @@ const { title, description } = Astro.props;
     <meta name="generator" content="{Astro.generator}" />
     <meta name="description" content={description} />
     <title>Breccia Mármol | {title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          if (localStorage.getItem("theme-mode") === "dark") {
+            document.documentElement.classList.add("theme-dark");
+          }
+        } catch {}
+      })();
+    </script>
   </head>
-  <body class="bg-stone-50 text-stone-900 antialiased flex min-h-screen flex-col">
+  <body class="bg-stone-50 text-stone-900 antialiased flex min-h-screen flex-col" data-api-base-url={apiBaseUrl}>
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-stone-900 focus:shadow-md">
       Saltar al contenido
     </a>
@@ -35,23 +45,17 @@ const { title, description } = Astro.props;
 
     <script>
       document.addEventListener("DOMContentLoaded", async function () {
+        const apiBase = document.body.dataset.apiBaseUrl || "http://localhost:5001";
         const root = document.documentElement;
         const themeButton = document.getElementById("theme-toggle-btn");
-        const themeLabel = document.getElementById("theme-toggle-label");
-
-        const savedTheme = localStorage.getItem("theme-mode");
-        if (savedTheme === "dark") {
-          root.classList.add("theme-dark");
-        }
 
         if (themeButton) {
           const syncThemeState = () => {
             const isDark = root.classList.contains("theme-dark");
             themeButton.setAttribute("aria-pressed", String(isDark));
             themeButton.classList.toggle("is-dark", isDark);
-            if (themeLabel) {
-              themeLabel.textContent = isDark ? "Negro" : "Blanco";
-            }
+            themeButton.setAttribute("aria-label", isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro");
+            themeButton.setAttribute("title", isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro");
           };
 
           syncThemeState();
@@ -76,7 +80,7 @@ const { title, description } = Astro.props;
         try {
           const controller = new AbortController();
           const timeout = setTimeout(() => controller.abort(), 3500);
-          const response = await fetch("http://localhost:5000/api/auth/profile", {
+          const response = await fetch(`${apiBase}/api/auth/profile`, {
             method: "GET",
             headers: { "Authorization": "Bearer " + token },
             signal: controller.signal,

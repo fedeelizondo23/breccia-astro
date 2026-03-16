@@ -27,9 +27,9 @@ const isActive = (href) =>
             href={link.href}
             aria-current={isActive(link.href) ? "page" : undefined}
             class:list={[
-              "rounded-md px-3 py-2 transition",
+              "nav-link rounded-md px-3 py-2 transition",
               isActive(link.href)
-                ? "bg-stone-900 text-white"
+                ? "nav-link-active bg-stone-900 text-white"
                 : "hover:bg-stone-100 hover:text-stone-900",
             ]}
           >
@@ -45,13 +45,12 @@ const isActive = (href) =>
         type="button"
         class="theme-switch"
         aria-pressed="false"
-        aria-label="Cambiar modo de color"
-        title="Cambiar modo negro/blanco"
+        aria-label="Cambiar tema"
+        title="Cambiar tema"
       >
         <span class="theme-switch-track" aria-hidden="true">
           <span class="theme-switch-knob"></span>
         </span>
-        <span id="theme-toggle-label" class="theme-switch-text">Blanco</span>
       </button>
       <div id="user-info"></div>
       {!user && (

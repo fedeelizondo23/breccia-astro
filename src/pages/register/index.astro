@@ -1,6 +1,8 @@
 ---
 const title = "Registro";
 import Layout from "@/layouts/Layout.astro";
+
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? "http://localhost:5001";
 ---
 
 <Layout title={title}>
@@ -8,7 +10,7 @@ import Layout from "@/layouts/Layout.astro";
     <h1 class="text-center text-3xl font-bold">Crear una cuenta</h1>
     <p class="mt-3 text-center text-sm">Regístrate para solicitar y dar seguimiento a tus cotizaciones.</p>
     
-    <form id="register-form" class="space-y-4">
+    <form id="register-form" class="space-y-4" data-api-base-url={apiBaseUrl}>
       <div>
         <label for="username" class="mb-2 block text-sm font-semibold text-stone-700">Nombre de usuario</label>
         <input type="text" id="username" name="username" placeholder="Ingresa tu nombre de usuario" required 
@@ -49,6 +51,7 @@ import Layout from "@/layouts/Layout.astro";
 
       form.onsubmit = async function (event) {
         event.preventDefault();
+        const apiBase = form.dataset.apiBaseUrl || "http://localhost:5001";
 
         const formData = new FormData(form);
         const user = {
@@ -58,7 +61,7 @@ import Layout from "@/layouts/Layout.astro";
         };
 
         try {
-          const response = await fetch("http://localhost:5000/api/auth/register", {
+          const response = await fetch(`${apiBase}/api/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
