@@ -6,56 +6,97 @@ import graniteImage from "@/granite.avif";
 import quartzImage from "@/quartz.avif";
 import cuarcitaImage from "@/cuarcita.avif";
 import Map from "../components/Map.astro";
-import { getSession } from 'auth-astro/server';
+
+const materials = [
+  {
+    title: "Mármol",
+    description: "Elegancia natural para cocinas, baños y proyectos residenciales de alta gama.",
+    image: marbleImage,
+  },
+  {
+    title: "Granito",
+    description: "Máxima resistencia al uso diario, ideal para superficies de trabajo exigentes.",
+    image: graniteImage,
+  },
+  {
+    title: "Cuarzo",
+    description: "Acabado uniforme y moderno con gran durabilidad para interiores contemporáneos.",
+    image: quartzImage,
+  },
+  {
+    title: "Cuarcita",
+    description: "Textura y carácter natural para espacios únicos con personalidad premium.",
+    image: cuarcitaImage,
+  },
+];
 ---
 
-<Layout title="Inicio" description="Esta es la página principal donde muestro el contenido de mi página">
-  
-  <section class="bg-white shadow-lg rounded-lg p-8 text-center mb-10">
-    <h1 class="text-4xl font-bold text-gray-800">Bienvenido a Breccia Mármol</h1>
-    <p class="text-lg text-gray-600 mt-4">
-      Somos especialistas en mármol, granito, cuarzo y cuarcita, ofreciendo cubiertas de la más alta calidad
-      para transformar tus espacios con elegancia y durabilidad.
-    </p>
-  </section>
-
-  <main class="container mx-auto p-8">
-    <section class="bg-white shadow-lg rounded-lg p-8 text-center mb-10">
-      <h1 class="text-4xl font-bold text-gray-800">Especialistas en Mármol, Granito, Cuarzo y Cuarcita</h1>
-      <p class="text-lg text-gray-600 mt-4">
-        Fabricamos e instalamos cocinas, lavabos, asadores y cubiertas para mesas con materiales de alta calidad.
-      </p>
-      <a href="/contact" class="mt-6 inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">Contáctanos</a>
-    </section>
-
-    <section class="services text-center mb-10">
-      <h2 class="text-3xl font-bold text-gray-800 mb-6">Nuestros Servicios</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
-          <Image src={marbleImage} alt="Mármol" class="w-full h-48 object-cover rounded-md mb-4" />
-          <h3 class="text-xl font-semibold text-gray-700">Mármol</h3>
-          <p class="text-gray-600">Elegancia y durabilidad para cualquier espacio.</p>
-        </div>
-
-        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
-          <Image src={graniteImage} alt="Granito" class="w-full h-48 object-cover rounded-md mb-4" />
-          <h3 class="text-xl font-semibold text-gray-700">Granito</h3>
-          <p class="text-gray-600">Resistencia y belleza en cada pieza.</p>
-        </div>
-
-        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
-          <Image src={quartzImage} alt="Cuarzo" class="w-full h-48 object-cover rounded-md mb-4" />
-          <h3 class="text-xl font-semibold text-gray-700">Cuarzo</h3>
-          <p class="text-gray-600">Material moderno con acabados perfectos.</p>
-        </div>
-
-        <div class="service bg-white shadow-md rounded-lg p-6 text-center">
-          <Image src={cuarcitaImage} alt="Cuarcita" class="w-full h-48 object-cover rounded-md mb-4" />
-          <h3 class="text-xl font-semibold text-gray-700">Cuarcita</h3>
-          <p class="text-gray-600">Fuerza y estética natural para tu hogar.</p>
+<Layout title="Inicio" description="Especialistas en cubiertas de mármol, granito, cuarzo y cuarcita en México.">
+  <section class="section-card mb-8 overflow-hidden sm:mb-10">
+    <div class="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr]">
+      <div>
+        <span class="mb-4 inline-block rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-stone-700">
+          Desde 1993
+        </span>
+        <h1 class="text-4xl font-bold sm:text-5xl">Cubiertas premium para transformar tus espacios</h1>
+        <p class="mt-4 max-w-2xl text-base sm:text-lg">
+          Diseñamos, fabricamos e instalamos superficies en mármol, granito, cuarzo y cuarcita con enfoque en calidad,
+          detalle y durabilidad.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/products" class="btn-primary">Ver materiales</a>
+          <a href="/contact" class="btn-secondary">Solicitar cotización</a>
         </div>
       </div>
-    </section>
-  </main>
+      <div class="rounded-2xl border border-stone-200 bg-stone-100 p-6">
+        <h2 class="text-xl font-semibold">¿Qué hacemos?</h2>
+        <ul class="mt-4 space-y-3 text-sm text-stone-700">
+          <li>• Cubiertas para cocinas y barras</li>
+          <li>• Lavabos y mobiliario de baño</li>
+          <li>• Cubiertas para mesas y asadores</li>
+          <li>• Asesoría técnica y acabados a medida</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <div class="mb-6 flex items-end justify-between gap-4">
+      <div>
+        <h2 class="text-3xl font-bold">Materiales que trabajamos</h2>
+        <p class="mt-2 text-sm sm:text-base">Seleccionamos cada pieza para asegurar estética, resistencia y larga vida útil.</p>
+      </div>
+      <a href="/products" class="btn-secondary">Ver catálogo completo</a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {materials.map((material) => (
+        <article class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <Image src={material.image} alt={material.title} class="h-52 w-full object-cover" />
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">{material.title}</h3>
+            <p class="mt-2 text-sm">{material.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-card mb-10">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div>
+        <h3 class="text-lg font-semibold">Atención personalizada</h3>
+        <p class="mt-2 text-sm">Te guiamos desde la selección del material hasta la instalación final.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold">Instalación profesional</h3>
+        <p class="mt-2 text-sm">Procesos limpios, tiempos claros y acabados de precisión.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold">Garantía de calidad</h3>
+        <p class="mt-2 text-sm">Trabajamos con materiales confiables para proyectos durables.</p>
+      </div>
+    </div>
+  </section>
+
   <Map />
 </Layout>
